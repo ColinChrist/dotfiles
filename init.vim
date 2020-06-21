@@ -133,6 +133,12 @@ call plug#begin('~/.vim/plugged')
  " If you want :UltiSnipsEdit to split your window.
  let g:UltiSnipsEditSplit="vertical"
  
+ " NERDTree config
+" enable line numbers
+ let NERDTreeShowLineNumbers=1
+ " make sure relative line numbers are used
+ autocmd FileType nerdtree setlocal relativenumber
+
 " vim-go configs
  let g:go_fmt_command = "goimports"
  let g:go_auto_type_info = 1
