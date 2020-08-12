@@ -1,4 +1,3 @@
-
 "-------------------------------------------------------------------------------------------------
 " coc.nvim default settings
 "
@@ -20,10 +19,10 @@ function! s:check_back_space() abort
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by
 "other plugin.
 inoremap <silent><expr> <TAB>
-   \ pumvisible() ? "\<C-n>" :
+   \ pumvisible() ? "\<C-j>" :
    \ <SID>check_back_space() ? "\<TAB>" :
    \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" :
+inoremap <expr><S-TAB> pumvisible() ? "\<C-k>" :
 "\<C-h>"
 
 " use <c-space>for trigger completion
@@ -53,8 +52,8 @@ nnoremap <silent> U :call <SID>show_documentation()<CR>
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"vmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions

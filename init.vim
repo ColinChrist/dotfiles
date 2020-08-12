@@ -48,16 +48,22 @@ call plug#begin('~/.vim/plugged')
  Plug 'tpope/vim-fugitive'
  Plug 'phanviet/vim-monokai-pro'
  Plug 'vim-airline/vim-airline'
- Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 
  " vim game to become faster
- Plug 'ThePrimeagen/vim-be-good'
+ Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
 
  Plug 'vimwiki/vimwiki'
 
  Plug 'gabrielelana/vim-markdown'
 
  Plug 'unblevable/quick-scope'
+
+ Plug 'Dave-Elec/gruvbox'
+
+ Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+ Plug 'easymotion/vim-easymotion'
  " initialize plugin system
  call plug#end()
  set relativenumber
@@ -95,7 +101,8 @@ call plug#begin('~/.vim/plugged')
  set shortmess+=c
 
  set colorcolumn=80
- highlight ColorColumn ctermbg=0 guibg=lightgrey
+ " highlight ColorColumn ctermbg=0 
+ " guibg=lightgrey
  " --- vim go (polyglot) settings.
  let g:go_highlight_build_constraints = 1
  let g:go_highlight_extra_types = 1
@@ -112,7 +119,8 @@ call plug#begin('~/.vim/plugged')
  let g:go_highlight_variable_declarations = 1
  let g:go_auto_sameids = 1
  
- colorscheme gruvbox
+" colorscheme gruvbox
+autocmd vimenter * colorscheme gruvbox
 "set background=dark
 let g:gruvbox_transparent_bg=1
  
@@ -138,21 +146,31 @@ let g:gruvbox_transparent_bg=1
 "remaps
  vnoremap J :m '>+1<CR>gv=gv
  vnoremap K :m '<-2<CR>gv=gv
- nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
+ nnoremap <leader>vsd :colorscheme gruvbox<bar>:set background=dark<CR>
+ nnoremap <leader>vsl :colorscheme gruvbox<bar>:set background=light<CR>
 
+ nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
  nnoremap <leader>ni :tabnew ~/.config/nvim/init.vim<CR>
+ nnoremap <leader>tn :tabnew<CR>
+ nnoremap gl F ly$:vs "
  nnoremap , <C-w><C-w>
  command! Reload :source ~/.config/nvim/init.vim
 
+ nnoremap <C-j> <C-w>j
+ nnoremap <C-k> <C-w>k
+ nnoremap <C-h> <C-w>h
+ nnoremap <C-l> <C-w>l
+
  "remap for git
- nmap <leader>gh :diffget //3<CR>
- nmap <leader>gu :diffget //2<CR>
+ nmap <leader>gj :diffget //3<CR>
+ nmap <leader>gf :diffget //2<CR>
  nmap <leader>gs :G<CR>
 
- "remap nerdtree
- map <C-n> :NERDTreeToggle<CR>
 
  
  source ~/.config/nvim/plug-config/vim-go.vim
  source ~/.config/nvim/plug-config/coc.vim
  source ~/.config/nvim/plug-config/fzf.vim
+ 
+ "remap nerdtree
+ nmap <C-n> :NERDTreeToggle<CR>

@@ -18,6 +18,7 @@ map <C-f> :Files<CR>
 nnoremap <leader>g :Rg<CR>
 "nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :Marks<CR>
+nnoremap <leader>h :Hist<CR>
 
 
 let g:fzf_tags_command = 'ctags -R'
