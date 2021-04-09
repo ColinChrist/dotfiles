@@ -29,6 +29,7 @@
  autocmd FileType go nmap <Leader>gc <Plug>(go-coverage-toggle)                 
  autocmd FileType go nmap <Leader>f :GoDecls<CR>
  autocmd FileType go nmap <Leader>fa :GoDeclsDir<CR>
+ autocmd FileType go nnoremap K :norm K<CR><C-w>k
  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')

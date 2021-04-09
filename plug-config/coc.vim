@@ -19,11 +19,10 @@ function! s:check_back_space() abort
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by
 "other plugin.
 inoremap <silent><expr> <TAB>
-   \ pumvisible() ? "\<C-j>" :
+   \ pumvisible() ? "\<C-n>" :
    \ <SID>check_back_space() ? "\<TAB>" :
    \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-k>" :
-"\<C-h>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-k>" : "\<C-h>"
 
 " use <c-space>for trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()

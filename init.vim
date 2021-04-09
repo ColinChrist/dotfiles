@@ -8,6 +8,9 @@ call plug#begin('~/.vim/plugged')
 " any valid git url is allowed
  Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
+ " Github-Dashboard
+ Plug 'junegunn/vim-github-dashboard'
+
 " multiple Plug commands can be written in a single line using | separators
  "Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
 
@@ -34,6 +37,8 @@ call plug#begin('~/.vim/plugged')
 
  Plug 'tpope/vim-surround'
 
+ "programming
+ Plug 'scrooloose/nerdcommenter'
  "go area
  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
  Plug 'AndrewRadev/splitjoin.vim'
@@ -64,8 +69,31 @@ call plug#begin('~/.vim/plugged')
  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
  Plug 'easymotion/vim-easymotion'
+ "
+ "TSX highlighting
+ Plug 'leafgarland/typescript-vim'
+ Plug 'peitalin/vim-jsx-typescript'
+
+ "jsonnet highlighting
+ Plug 'google/vim-jsonnet'
+
+ Plug 't9md/vim-choosewin'
+
+ "Vim in Browser
+ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+ "Alter nvim welcome-screen
+ Plug 'mhinz/vim-startify'
+
+ Plug 'jupyter-vim/jupyter-vim'
+
+ "cheat.sh
+ Plug 'dbeniamine/cheat.sh-vim'
+
  " initialize plugin system
  call plug#end()
+
+" sets
  set relativenumber
  set ignorecase
  set splitbelow
@@ -118,7 +146,7 @@ call plug#begin('~/.vim/plugged')
  let g:go_highlight_format_strings = 1
  let g:go_highlight_variable_declarations = 1
  let g:go_auto_sameids = 1
- 
+
 " colorscheme gruvbox
 autocmd vimenter * colorscheme gruvbox
 "set background=dark
@@ -136,41 +164,72 @@ let g:gruvbox_transparent_bg=1
  let g:netrw_banner = 0
  let g:netrw_winsize = 25
  
- " NERDTree config
+" NERDTree config
 " enable line numbers
  let NERDTreeShowLineNumbers=1
  " make sure relative line numbers are used
  autocmd FileType nerdtree setlocal relativenumber
 
+"startify
+ let g:startify_session_dir = '~/.vim/sessions'
+
+" Yaml
+    syntax on
+    filetype plugin indent on
+
+    "Get the 2-space YAML as the default when hit carriage return after the colon
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" choosewin
+ " if you want to use overlay feature
+ let g:choosewin_overlay_enable = 1
+ 
+" " Always use the same env for vim, regardless of what Python
+" " environment is loaded in the shell from which vim is launched
+" let g:vim_anaconda_path = '~/anaconda3'
+" if exists('g:vim_anaconda_path')
+"     pythonx import os; import vim
+"     pythonx activate_this = os.path.join(vim.eval('g:vim_anaconda_path'), 'bin/activate')
+"     pythonx with open(activate_this) as f: exec(f.read(), {'__file__': activate_this})
+" endif
  
 "remaps
  vnoremap J :m '>+1<CR>gv=gv
  vnoremap K :m '<-2<CR>gv=gv
  nnoremap <leader>vsd :colorscheme gruvbox<bar>:set background=dark<CR>
  nnoremap <leader>vsl :colorscheme gruvbox<bar>:set background=light<CR>
+ "fold all go functions
+ nnoremap <leader>zaf :%g/func.*{/normal vafzf<CR> 
+ "fold current go function
+ nnoremap <leader>zf :norm vafzf<CR>
 
  nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
  nnoremap <leader>ni :tabnew ~/.config/nvim/init.vim<CR>
  nnoremap <leader>tn :tabnew<CR>
+     nnoremap <leader>l :norm yy<CR>:"j
+ 
  nnoremap gl F ly$:vs "
- nnoremap , <C-w><C-w>
+ "nnoremap , <C-w><C-w>
  command! Reload :source ~/.config/nvim/init.vim
-
+ nnoremap gD :vs<CR>:norm gd<CR>
  nnoremap <C-j> <C-w>j
  nnoremap <C-k> <C-w>k
  nnoremap <C-h> <C-w>h
  nnoremap <C-l> <C-w>l
 
- "remap for git
+ command! wmks 
+
+"remap for git
  nmap <leader>gj :diffget //3<CR>
  nmap <leader>gf :diffget //2<CR>
  nmap <leader>gs :G<CR>
 
+ nmap  -  <Plug>(choosewin)
+ 
+"sources
+source ~/.config/nvim/plug-config/vim-go.vim
+source ~/.config/nvim/plug-config/coc.vim
+source ~/.config/nvim/plug-config/fzf.vim
 
- 
- source ~/.config/nvim/plug-config/vim-go.vim
- source ~/.config/nvim/plug-config/coc.vim
- source ~/.config/nvim/plug-config/fzf.vim
- 
- "remap nerdtree
- nmap <C-n> :NERDTreeToggle<CR>
+"remap nerdtree
+nmap <C-n> :NERDTreeToggle<CR>
